@@ -31,6 +31,7 @@ export class TableSortableComponent implements OnInit {
   @Input()
   public set dataRows(value: string[][]) {
     this._dataRows = value;
+    this.config.length=this._dataRows?.length??0;
     this._getData();
   }
 
@@ -68,7 +69,6 @@ constructor(){
     //#region DATA TABLE METHODS
     // this function gets data from dataRows and set data into rows to show table
     private _getData():void{
-      if(!this.config)return;
       const startAt=this.config.index*this.config.size;
       this.rows=this._dataRows?.slice(startAt, startAt+this.config.size);
     }

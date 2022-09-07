@@ -37,7 +37,6 @@ import {MatSortModule} from '@angular/material/sort';
 
 import { TableSortableComponent } from './tables/table-sortable/table-sortable.component';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -83,7 +82,6 @@ export class MaterialModule {}
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     MaterialModule
   ],
   exports: [

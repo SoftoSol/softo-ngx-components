@@ -40,7 +40,7 @@ export class AppComponent {
         textAlign: 'left',
         sortable: true,
         value: (item) => {
-          console.log(item);
+          //console.log(item);
           return (item.email ?? "").toLowerCase();
         },
       },
@@ -68,7 +68,8 @@ export class AppComponent {
 
   private async fetchData(): Promise<void> {
    
-        var data:any[]  = [{
+        var data:any[]  = [
+          {
           email: "test@mail.com",
           role: "admin",
           createdAt: new Date()
@@ -77,6 +78,13 @@ export class AppComponent {
           role: "user",
           createdAt: new Date()
         }];
+        for (let i = 0; i < 100; i++) {
+          data.push({
+            email: "test" + i + "@mail.com",
+            role: "admin",
+            createdAt: new Date()
+          });
+        }
           this.tableData = data;
       }
 }
