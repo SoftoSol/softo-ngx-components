@@ -5,6 +5,12 @@ export interface TableAction{
     type:TableActionType
     onClick:(row:any)=>void
 }
+export interface TableButton{
+    label:string;
+    classes?:string;
+    onClick:()=>void
+}
+
 
 export enum TableActionType {
     Danger, 

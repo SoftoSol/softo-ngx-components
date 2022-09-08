@@ -7,5 +7,26 @@
   },
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/",
+    "email": "arham.anees@softosol.com",
+    "keywords": [
+      "angular",
+      "components",
+      "softo"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/softosol/softo-ngx-components.git"
+    },
+    "license": "MIT",
+    "author": "Arham Anees <arham.anees@softosol.com>",
+    "funding":{
+      "type": "individual",
+      "url": "https://www.buymeacoffee.com/arhamanees"
+    }
+
   }
 }

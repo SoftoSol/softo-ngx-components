@@ -1,6 +1,6 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { ColumnConfig, ColumnType, TableAction } from 'projects/softo-ngx-components/src/public-api';
+import { ColumnConfig, ColumnType, TableAction, TableButton } from 'projects/softo-ngx-components/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,14 @@ export class AppComponent {
   tableTitle: string = "List";
   tableColumns: ColumnConfig[]=[];
   tableData: any[] = [];
-  tableActions: TableAction[] = [
+  rowActions: TableAction[] = [];
+  tableActions: TableButton[] = [
+    {
+      label: "Add",
+      onClick: () => {
+        console.log('add');
+      }
+    }
     // {
     //   icon: `<i class="material-icons">edit</i>`,
     //   onClick(item) {

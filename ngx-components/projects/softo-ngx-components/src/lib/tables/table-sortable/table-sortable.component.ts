@@ -3,7 +3,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { SafeHtml } from '@angular/platform-browser';
-import { ColumnConfig,TableAction, TableActionType } from '../interfaces';
+import { ColumnConfig,TableAction, TableActionType, TableButton } from '../interfaces';
 import { PageEvent } from '@angular/material/paginator';
 import { ColumnType } from '../enums';
 
@@ -21,25 +21,20 @@ interface PaginationConfig{
 
 export class TableSortableComponent implements OnInit {
   //#region INPUTS
-  @Input()
-  public title:string="";
-
-  @Input()
-  public headerRow:ColumnConfig[]=[];
-  private _dataRows:string[][]=[];
-
-  @Input()
-  public set dataRows(value: string[][]) {
+  @Input() public title:string="";
+  @Input() public headerRow:ColumnConfig[]=[];
+  @Input() public rowActions:TableAction[]=[];
+  @Input() public icon:string|null=null;
+  @Input() public tableActions:TableButton[]=[];
+  @Input() public set dataRows(value: string[][]) {
     this._dataRows = value;
     this.config.length=this._dataRows?.length??0;
     this._getData();
   }
-
-  @Input()
-  public actions:TableAction[]=[];
   //#endregion
 
   //#region PROPERTIES
+  private _dataRows:string[][]=[];
   public rows:string[][]=[];
   public config:PaginationConfig;
   ColumnType=ColumnType;
@@ -73,7 +68,7 @@ constructor(){
       this.rows=this._dataRows?.slice(startAt, startAt+this.config.size);
     }
     onPagniatorChange(value:PageEvent){
-      console.log(value);
+      //console.log(value);
       this.config.size=value.pageSize;
       this.config.index=value.pageIndex;
       this._getData();
