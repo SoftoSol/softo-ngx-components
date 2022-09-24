@@ -5,78 +5,83 @@
 ### HTML
 
 ```` HTML
-    <softo-table-sortable [title]="tableTitle" iconType="assignments" 
-        [headerRow]="tableColumns" 
-        [dataRows]="tableData"
-        [actions]="tableActions">
-    </softo-table-sortable>
+  <softo-table-sortable 
+    title="List Name" 
+    [headerRow]="tableColumns" 
+    [dataRows]="tableData"
+    [rowActions]="rowActions"
+    [tableActions]="tableButtons"
+  >
+  </softo-table-sortable>
 ````
 
 ### TS  
 
 ```` TypeScript
- tableTitle: string = "List";
-  tableColumns: ColumnConfig[];
-  tableData: [] = [];
-  tableActions: TableAction[] = [
-     {
-       icon: `<i class="material-icons">edit</i>`,
-       onClick(item) {
-         console.log(item);
-       },
-       type: TableActionType.Warning
-     },
-     {
-       icon: `<i class="material-icons">close</i>`,
-       onClick(item) {
-         console.log(item);
-       },
-       type: TableActionType.Danger
-     }
+  public tableData: any[] = [];
+  public rowActions: RowAction[] = [];
+  public tableButtons: TableButton[] = [
+    {
+      label: "Add",
+      classes:'btn-primary',
+      onClick: () => {
+        // some action
+      }
+    }
   ]
-
-  ngOnInit(): void {
-
-    this.tableColumns = [
-      {
-        title: 'Email',
-        type: ColumnType.Text,
-        textAlign: 'left',
-        sortable: true,
-        value: (item) => {
-          return (item.email ?? "").toLowerCase();
-        },
+  public tableColumns: ColumnConfig[] = [
+    {
+      title: 'Email',
+      type: ColumnType.Text,
+      textAlign: 'left',
+      sortable: true,
+      value: (item) => {
+        return (item.email ?? "").toLowerCase();
       },
-      {
-        title: 'Role',
-        type: ColumnType.Text,
-        textAlign: 'left',
-        sortable: true,
-        value: (item) => {
-          return this.titleCase.transform(item.role);
-        }
-      }, {
-        title: 'Created On',
-        type: ColumnType.Text,
-        textAlign: 'left',
-        sortable: true,
-        value: (item) => {
-          return (new Date(item.createdAt)).toDateString();
-        }
+    },
+    {
+      title: 'Role',
+      type: ColumnType.Text,
+      textAlign: 'left',
+      sortable: true,
+      value: (item) => {
+        return item.role;
+      }
+    }, {
+      title: 'Created On',
+      type: ColumnType.Text,
+      textAlign: 'left',
+      sortable: false,
+      value: (item) => {
+        return (new Date(item.createdAt)).toDateString();
+      }
 
-      }
-    ];
- this.fetchData();
-  }
-  fetchData().subscribe(
-      (response: any) => {
-        const { data } = response;
-        if (response.code == 200) {
+    }
+  ];
+  
+  ...
+  private async fetchData(): Promise<void> {
+   
+        var data:any[]  = [
+          {
+          email: "test@mail.com",
+          role: "admin",
+          createdAt: new Date()
+        }, {
+          email: "test2@mail.com",
+          role: "user",
+          createdAt: new Date()
+        }];
+        for (let i = 0; i < 100; i++) {
+          data.push({
+            email: "test" + i + "@mail.com",
+            role: "admin",
+            createdAt: (new Date())
+          });
+        }
+        setTimeout(() => {
+          
           this.tableData = data;
-        }
-        else {
-          // todo: show error message
-        }
+        }, 2000);
       }
-    )
 ````

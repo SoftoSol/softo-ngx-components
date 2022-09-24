@@ -1,6 +1,5 @@
-import { TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { ColumnConfig, ColumnType, RowAction, TableButton } from 'projects/softo-ngx-components/src/public-api';
+import { ColumnConfig, ColumnType, RowAction, RowActionType, TableButton } from 'projects/softo-ngx-components/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +11,17 @@ export class AppComponent {
 
   constructor() { }
 
-  tableTitle: string = "List";
-  tableColumns: ColumnConfig[]=[];
   tableData: any[] = [];
-  rowActions: RowAction[] = [];
-  tableActions: TableButton[] = [
+  public rowActions: RowAction[] = [
+    {
+      icon:`<i class="fa fa-edit"></i>`,
+      onClick:(row)=>{
+        // some action
+      },
+      type:RowActionType.Warning
+    }
+  ];
+  tableButtons: TableButton[] = [
     {
       label: "Add",
       classes:'btn-primary',
@@ -31,38 +36,39 @@ export class AppComponent {
       }
     }
   ]
+  tableColumns: ColumnConfig[] = [
+    {
+      title: 'Email',
+      type: ColumnType.Text,
+      textAlign: 'left',
+      sortable: true,
+      value: (item) => {
+        //console.log(item);
+        return (item.email ?? "").toLowerCase();
+      },
+    },
+    {
+      title: 'Role',
+      type: ColumnType.Text,
+      textAlign: 'left',
+      sortable: true,
+      value: (item) => {
+        return item.role;
+      }
+    }, {
+      title: 'Created On',
+      type: ColumnType.Text,
+      textAlign: 'left',
+      sortable: false,
+      value: (item) => {
+        return (new Date(item.createdAt)).toDateString();
+      }
+
+    }
+  ];
   ngOnInit(): void {
 
-    this.tableColumns = [
-      {
-        title: 'Email',
-        type: ColumnType.Text,
-        textAlign: 'left',
-        sortable: true,
-        value: (item) => {
-          //console.log(item);
-          return (item.email ?? "").toLowerCase();
-        },
-      },
-      {
-        title: 'Role',
-        type: ColumnType.Text,
-        textAlign: 'left',
-        sortable: true,
-        value: (item) => {
-          return item.role;
-        }
-      }, {
-        title: 'Created On',
-        type: ColumnType.Text,
-        textAlign: 'left',
-        sortable: false,
-        value: (item) => {
-          return (new Date(item.createdAt)).toDateString();
-        }
-
-      }
-    ];
+ 
  this.fetchData();
   }
 
