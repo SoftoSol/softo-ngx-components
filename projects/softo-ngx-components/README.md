@@ -35,6 +35,6 @@ imports:[
 You can find change log for each version
 
 - [13.1.3](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/changelog/13.1.3.md)  
-- [13.2.0](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/changelog/13.2.0.md)
+- [13.2.2](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/changelog/13.2.2.md)
 
 Please also remember to import `BrowserAnimationModule` along with `SoftoNgxComponents`  
