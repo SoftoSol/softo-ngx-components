@@ -1,8 +1,6 @@
 # Table Sortable
 
-
 ## Example
-
 
 ### HTML
 
@@ -14,8 +12,7 @@
     </softo-table-sortable>
 ````
 
-
-### TS 
+### TS  
 
 ```` TypeScript
  tableTitle: string = "List";

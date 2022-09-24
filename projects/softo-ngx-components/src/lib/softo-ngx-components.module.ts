@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { SoftoNgxComponentsComponent } from './softo-ngx-components.component';
 
 
 import {MatNativeDateModule} from '@angular/material/core';
@@ -77,7 +76,6 @@ export class MaterialModule {}
 
 @NgModule({
   declarations: [
-    SoftoNgxComponentsComponent,
     TableSortableComponent
   ],
   imports: [

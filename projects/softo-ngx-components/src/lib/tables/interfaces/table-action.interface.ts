@@ -1,8 +1,8 @@
 import { SafeHtml } from "@angular/platform-browser"
 
-export interface TableAction{
+export interface RowAction{
     icon:SafeHtml
-    type:TableActionType
+    type:RowActionType
     onClick:(row:any)=>void
 }
 export interface TableButton{
@@ -12,7 +12,7 @@ export interface TableButton{
 }
 
 
-export enum TableActionType {
+export enum RowActionType {
     Danger, 
     Warning, 
     Info

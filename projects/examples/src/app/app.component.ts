@@ -1,6 +1,6 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { ColumnConfig, ColumnType, TableAction, TableButton } from 'projects/softo-ngx-components/src/public-api';
+import { ColumnConfig, ColumnType, RowAction, TableButton } from 'projects/softo-ngx-components/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -15,28 +15,21 @@ export class AppComponent {
   tableTitle: string = "List";
   tableColumns: ColumnConfig[]=[];
   tableData: any[] = [];
-  rowActions: TableAction[] = [];
+  rowActions: RowAction[] = [];
   tableActions: TableButton[] = [
+    {
+      label: "Add",
+      classes:'btn-primary',
+      onClick: () => {
+        console.log('add');
+      }
+    },
     {
       label: "Add",
       onClick: () => {
         console.log('add');
       }
     }
-    // {
-    //   icon: `<i class="material-icons">edit</i>`,
-    //   onClick(item) {
-    //     console.log(item);
-    //   },
-    //   type: TableActionType.Warning
-    // },
-    // {
-    //   icon: `<i class="material-icons">close</i>`,
-    //   onClick(item) {
-    //     console.log(item);
-    //   },
-    //   type: TableActionType.Danger
-    // }
   ]
   ngOnInit(): void {
 
@@ -63,7 +56,7 @@ export class AppComponent {
         title: 'Created On',
         type: ColumnType.Text,
         textAlign: 'left',
-        sortable: true,
+        sortable: false,
         value: (item) => {
           return (new Date(item.createdAt)).toDateString();
         }
@@ -89,9 +82,12 @@ export class AppComponent {
           data.push({
             email: "test" + i + "@mail.com",
             role: "admin",
-            createdAt: new Date()
+            createdAt: (new Date())
           });
         }
+        setTimeout(() => {
+          
           this.tableData = data;
+        }, 2000);
       }
 }

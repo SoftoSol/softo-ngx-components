@@ -1,29 +1,38 @@
 <div class="card">
-    <div class="card-header card-header-primary card-header-icon" *ngIf="icon!=null">
-        <div class="card-icon">
+    <div class="card-header card-header-primary card-header-icon">
+        <div class="card-icon"  *ngIf="icon!=null">
             <i class="material-icons">{{icon}}</i>
         </div>
-        <h4 class="card-title">{{title}}</h4>
-    </div>
-    <div class="card-body">
-        <div class="toolbar">
-            <!--        Here you can write extra buttons/actions for the toolbar              -->
-            <div >
-                <button  *ngFor="let action of tableActions"  [class]="'btn ' + action.classes??''" (click)="action.onClick()">
-                    <span class="button-text">{{action.label}}</span>
-                </button>
+        <div class="d-flex justify-content-between align-items-center">
+
+            <h4 class="card-title">{{title}}</h4>
+            <div class="toolbar">
+                <!--        Here you can write extra buttons/actions for the toolbar              -->
+                <div >
+                    <button  *ngFor="let action of tableActions"  [class]="'btn ' +( action.classes??'')" (click)="action.onClick()">
+                        <span class="button-text">{{action.label}}</span>
+                    </button>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="card-body">
         <div class="material-datatables">
             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
                 width="100%" style="width:100%">
                 <thead>
                     <tr>
-                        <th *ngFor="let row of headerRow" [class]="colHeadClass(row)">{{ row.title }}</th>
-                        <div *ngIf="rowActions.length>0"><th class="text-right disabled-sorting">Actions</th></div>
+                        <th *ngFor="let row of headerRow" [class]="colHeadClass(row)" (click)="sortData(row)">{{ row.title }} <span *ngIf="row.sortable" class="arrow-container"><p [class]="'arrow '+ row.sortDir"></p></span></th>
+                        <th *ngIf="rowActions.length>0" class="text-right disabled-sorting">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr *ngIf="loading; else data">
+                        <td colspan="100%" class="text-center">
+                            <span>Loading...</span>
+                        </td>
+                    </tr>
+                    <ng-template #data>
                     <tr *ngFor="let row of rows">
                         <td *ngFor="let col of headerRow;index as i">
                             <div *ngIf="col.type==ColumnType.Html" [innerHtml]="getAsSafeHtml(col.value(row))">
@@ -36,6 +45,7 @@
                             *ngFor="let action of rowActions" [innerHtml]="action.icon" (click)="action.onClick(row)"></a>
                         </td>
                     </tr>
+                </ng-template>
                 </tbody>
                 <tfoot>
                     <td [colSpan]="headerRow.length">

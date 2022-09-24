@@ -3,6 +3,5 @@
  */
 
 // export * from './lib/softo-ngx-components.service';
-export * from './lib/softo-ngx-components.component';
 export * from './lib/softo-ngx-components.module';
 export * from './lib/tables';
