@@ -22,8 +22,8 @@
                 width="100%" style="width:100%">
                 <thead>
                     <tr>
-                        <th *ngFor="let row of headerRow" [class]="colHeadClass(row)" (click)="sortData(row)">{{ row.title }} <span *ngIf="row.sortable" class="arrow-container"><p [class]="'arrow '+ row.sortDir"></p></span></th>
-                        <th *ngIf="rowActions.length>0" class="text-right disabled-sorting">Actions</th>
+                        <th *ngFor="let row of header" [class]="colHeadClass(row)" (click)="sortData(row)">{{ row.title }} <span *ngIf="row.sortable" class="arrow-container"><p [class]="'arrow '+ row.sortDir"></p></span></th>
+                        <th *ngIf="rowActions.length>0" class="disabled-sorting">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,21 +34,25 @@
                     </tr>
                     <ng-template #data>
                     <tr *ngFor="let row of rows">
-                        <td *ngFor="let col of headerRow;index as i">
+                        <td *ngFor="let col of header;index as i">
                             <div *ngIf="col.type==ColumnType.Html" [innerHtml]="getAsSafeHtml(col.value(row))">
                             </div>
                             <div *ngIf="col.type==ColumnType.Text">{{col.value(row)}}</div>
                         </td>
 
-                        <td class="text-right">
+                        <td class="">
+                            <ng-container *ngFor="let action of rowActions">
                             <a href="javascript:void(0)" [class]="getActionClasses(action)" 
-                            *ngFor="let action of rowActions" [innerHtml]="action.icon" (click)="action.onClick(row)"></a>
+                            *ngIf="action?.show==undefined?true:action?.show(row)" [innerHtml]="action.icon"  (click)="action.onClick(row)"></a>
+                            </ng-container>
                         </td>
                     </tr>
                 </ng-template>
                 </tbody>
+               
+
                 <tfoot>
-                    <td [colSpan]="headerRow.length">
+                    <td [colSpan]="(header.length+(rowActions.length>0?1:0))">
                     <mat-paginator [length]="config.length" 
                     [pageSize]="config.size" 
                     [pageSizeOptions]="config.sizes" 
@@ -56,6 +60,9 @@
                     aria-label="Select page">
                     </mat-paginator>
                 </td>
+                </tfoot>
+                <tfoot >
+                    <td *ngFor="let val of footer">{{val}}</td>
                 </tfoot>
                 </table>
         </div>

@@ -70,6 +70,8 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule
+  ],
+  declarations: [
   ]
 })
 export class MaterialModule {}
