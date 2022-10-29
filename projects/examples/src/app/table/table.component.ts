@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { SoftoAlertService } from 'projects/softo-ngx-components/src/lib/services/alert/alert.service';
-import { ColumnConfig, ColumnType, RowAction, RowActionType, TableButton } from 'softo-ngx-components';
+import { ColumnConfig, ColumnType, RowAction, RowActionType, TableButton, SoftoAlertService } from 'softo-ngx-components';
+
 
 @Component({
   selector: 'app-table',
@@ -10,7 +10,10 @@ import { ColumnConfig, ColumnType, RowAction, RowActionType, TableButton } from 
 export class TableComponent implements OnInit {
   title = 'examples';
   isloading:boolean=false;
-  constructor(private alert:SoftoAlertService) { }
+  constructor(
+    private alert:SoftoAlertService
+
+    ) { }
 
   tableData: any[] = [];
   public rowActions: RowAction[] = [

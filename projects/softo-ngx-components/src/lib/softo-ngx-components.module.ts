@@ -36,6 +36,7 @@ import {MatSortModule} from '@angular/material/sort';
 
 import { TableSortableComponent } from './tables/table-sortable/table-sortable.component';
 import { CommonModule } from '@angular/common';
+import { SoftoAlertService } from './services';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ export class MaterialModule {}
     CommonModule,
     MaterialModule
   ],
+  providers:[SoftoAlertService],
   exports: [
     TableSortableComponent
   ]
