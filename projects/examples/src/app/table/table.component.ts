@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { SoftoAlertService } from 'projects/softo-ngx-components/src/lib/services/alert/alert.service';
 import { ColumnConfig, ColumnType, RowAction, RowActionType, TableButton } from 'softo-ngx-components';
 
 @Component({
@@ -9,14 +10,22 @@ import { ColumnConfig, ColumnType, RowAction, RowActionType, TableButton } from 
 export class TableComponent implements OnInit {
   title = 'examples';
   isloading:boolean=false;
-  constructor() { }
+  constructor(private alert:SoftoAlertService) { }
 
   tableData: any[] = [];
   public rowActions: RowAction[] = [
     {
       icon:`<i class="fa fa-trash"></i>`,
-      onClick:(row:any)=>{
+      onClick:async (row:any)=>{
         // some action
+        let result=await this.alert.confirm("Are you sure you want to delete this item?");
+        if(result.isConfirmed){
+          // loading
+          this.alert.loading("Deleting...");
+          setTimeout(() => {
+            this.alert.success("Item deleted successfully");
+          }, 2000);
+        }
       },
       show:(row:any)=>{
         return row.role=='admin';
