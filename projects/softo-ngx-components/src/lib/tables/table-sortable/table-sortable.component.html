@@ -3,18 +3,23 @@
         <div class="card-icon"  *ngIf="icon!=null">
             <i class="material-icons">{{icon}}</i>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
-
+        <div class="d-flex justify-content-between align-items-baseline">
             <h4 class="card-title">{{title}}</h4>
-            <div class="toolbar">
-                <!--        Here you can write extra buttons/actions for the toolbar              -->
-                <div >
+            <div class="toolbar d-none d-md-block">
+                
                     <button  *ngFor="let action of tableActions"  [class]="'btn ' +( action.classes??'')" (click)="action.onClick()">
                         <span class="button-text">{{action.label}}</span>
                     </button>
-                </div>
+                
             </div>
         </div>
+        <div class="toolbar d-block d-md-none" style="text-align: right;">
+                
+            <button  *ngFor="let action of tableActions"  [class]="'btn ' +( action.classes??'')" (click)="action.onClick()">
+                <span class="button-text">{{action.label}}</span>
+            </button>
+        
+    </div>
     </div>
     <div class="card-body">
         <div class="material-datatables">
@@ -34,13 +39,13 @@
                     </tr>
                     <ng-template #data>
                     <tr *ngFor="let row of rows">
-                        <td *ngFor="let col of header;index as i">
+                        <td *ngFor="let col of header;index as i" [attr.data-label]="col.title">
                             <div *ngIf="col.type==ColumnType.Html" [innerHtml]="getAsSafeHtml(col.value(row))">
                             </div>
                             <div *ngIf="col.type==ColumnType.Text">{{col.value(row)}}</div>
                         </td>
 
-                        <td class="">
+                        <td data-label="Actions">
                             <ng-container *ngFor="let action of rowActions">
                             <a href="javascript:void(0)" [class]="getActionClasses(action)" 
                             *ngIf="action?.show==undefined?true:action?.show(row)" [innerHtml]="action.icon"  (click)="action.onClick(row)"></a>
@@ -51,7 +56,7 @@
                 </tbody>
                
 
-                <tfoot>
+                <tfoot *ngIf="!loading">
                     <td [colSpan]="(header.length+(rowActions.length>0?1:0))">
                     <mat-paginator [length]="config.length" 
                     [pageSize]="config.size" 
@@ -61,7 +66,7 @@
                     </mat-paginator>
                 </td>
                 </tfoot>
-                <tfoot >
+                <tfoot *ngIf="!loading">
                     <td *ngFor="let val of footer">{{val}}</td>
                 </tfoot>
                 </table>

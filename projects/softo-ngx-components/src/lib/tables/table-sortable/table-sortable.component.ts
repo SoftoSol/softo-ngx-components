@@ -17,6 +17,7 @@ interface PaginationConfig {
 @Component({
   selector: 'softo-table-sortable',
   templateUrl: 'table-sortable.component.html',
+  styleUrls:['table-sortable.component.css']
 })
 
 export class TableSortableComponent implements OnInit {
