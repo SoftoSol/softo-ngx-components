@@ -61,7 +61,8 @@
               "projects/examples/src/assets"
             ],
             "styles": [
-              "projects/examples/src/styles.css"
+              "projects/examples/src/styles.css",
+              "projects/examples/src/assets/scss/material-dashboard.scss"
             ],
             "scripts": []
           },

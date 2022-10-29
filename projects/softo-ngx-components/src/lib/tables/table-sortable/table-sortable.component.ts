@@ -17,12 +17,32 @@ interface PaginationConfig {
 @Component({
   selector: 'softo-table-sortable',
   templateUrl: 'table-sortable.component.html',
+  styleUrls:['table-sortable.component.css']
 })
 
 export class TableSortableComponent implements OnInit {
   //#region INPUTS
   @Input() public title: string = "";
-  @Input() public headerRow: ColumnConfig[] = [];
+  @Input() public set headerRow(row: ColumnConfig[]){
+    // if there is no data, return
+    if(!row) return;
+    // clear previous header configuration
+    this.header=[];
+    // set default configuration and add to header
+    row?.forEach(col => {
+      // if sortable is undefined but sort function is defined, set sortable to true
+      if (col.sortable == undefined && col.sort != undefined) col.sortable = true;
+      // column type is undefined, set to Text
+      if(!col.type) col.type = this.ColumnType.Text;
+      // if column type is undefined, set to Text
+      if(!col.textAlign) col.textAlign = 'left';
+      // if value is not defined, set to default
+      if(!col.value) col.value = (item:any)=>item[col.title];
+      // add column to header
+      this.header.push(col);
+    });
+  }
+  @Input() public footer:string[]=[];
   @Input() public rowActions: RowAction[] = [];
   @Input() public icon: string | null = null;
   @Input() public tableActions: TableButton[] = [];
@@ -36,6 +56,7 @@ export class TableSortableComponent implements OnInit {
 
   //#region PROPERTIES
   private _dataRows: string[][] = [];
+  public header:ColumnConfig[] = [];
   public rows: string[][] = [];
   public config: PaginationConfig;
   ColumnType = ColumnType;
@@ -63,7 +84,7 @@ export class TableSortableComponent implements OnInit {
   sortData(column: ColumnConfig) {
     if (!column.sortable) return;
     // remove sort from other columns
-    this.headerRow.forEach(col => {
+    this.header.forEach(col => {
       if (col != column) col.sortDir = undefined;
     });
     // sort data
