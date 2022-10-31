@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ColumnConfig, ColumnType, RowAction, RowActionType, TableButton, SoftoAlertService } from 'softo-ngx-components';
+import { ColumnConfig, ColumnType, RowAction, RowActionType, TableButton, SoftoAlertService, NotifierService } from 'softo-ngx-components';
 
 
 @Component({
@@ -11,8 +11,8 @@ export class TableComponent implements OnInit {
   title = 'examples';
   isloading:boolean=false;
   constructor(
-    private alert:SoftoAlertService
-
+    private alert:SoftoAlertService,
+    private notifier: NotifierService
     ) { }
 
   tableData: any[] = [];
@@ -29,6 +29,17 @@ export class TableComponent implements OnInit {
             this.alert.success("Item deleted successfully");
           }, 2000);
         }
+      },
+      show:(row:any)=>{
+        return row.role=='admin';
+      },
+      type:RowActionType.Warning
+    },
+    {
+      icon:`<i class="fa fa-trash"></i>`,
+      onClick:async (row:any)=>{
+        // some action
+        this.notifier.warning('It is a warning message');
       },
       show:(row:any)=>{
         return row.role=='admin';
@@ -92,7 +103,8 @@ export class TableComponent implements OnInit {
     this.fetchData();
      }
    
-     private async fetchData(): Promise<void> {
+     public async fetchData(): Promise<void> {
+      console.log('fetching data');
       this.isloading=true;
            var data:any[]  =[];
            for (let i = 0; i < 100; i++) {

@@ -1,0 +1,5 @@
+<input [type]="onClick?'button':'submit'" [value]="label" [class]="cssClass" *ngIf="!isLoading"   (click)="btnClick()">
+<button
+    [class]="cssClass" disabled *ngIf="isLoading"><span
+        class="spinner-border spinner-border-sm" role="status"
+        aria-hidden="true"></span>{{loadingLabel}}</button>

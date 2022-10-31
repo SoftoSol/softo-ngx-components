@@ -1,6 +1,10 @@
 {
   "name": "softo-ngx-components",
   "version": "13.2.1",
+  "sideEffects": [
+    "*.scss",
+    "*.css"
+  ],
   "peerDependencies": {
     "@angular/common": "^13.1.0",
     "@angular/core": "^13.1.0"
