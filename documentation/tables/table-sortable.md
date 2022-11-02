@@ -1,5 +1,22 @@
 # Table Sortable
 
+## Properties
+
+| Name  | Required | Type  |Description|
+|:------|:-------- |:------|:----------|
+|title  | No       |string |Title of table on top of card|
+|icon   | No       |string |Icon shown on top on of card|
+|headerRow|Yes|[ColumnConfig](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/tables/column-config.md)[]|Configurations for header row of table|
+|footer|No|string[]|Values for footer row of table. Footer will be shown in provided order|
+|rowActions|No|[RowAction](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/tables/row-action.md)|Actions for each row of table|
+|tableActions|No|[TableButton](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/tables/table-button.md)[]|Table level actions. It appears on top left corner|
+|loading|No|bool|Shows loading indicator on table row and hides footer and pagination|
+|dataRows|Yes|string[][]/any[]|Data to display as table|
+
+
+## Getting Started
+
+
 ## Example
 
 ### HTML
