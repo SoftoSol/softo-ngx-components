@@ -19,6 +19,7 @@ export class TableComponent implements OnInit {
   public rowActions: RowAction[] = [
     {
       icon:`<i class="fa fa-trash"></i>`,
+      tooltip: "Delete",
       onClick:async (row:any)=>{
         // some action
         let result=await this.alert.confirm("Are you sure you want to delete this item?");
@@ -37,6 +38,7 @@ export class TableComponent implements OnInit {
     },
     {
       icon:`<i class="fa fa-trash"></i>`,
+      tooltip:'Delete',
       onClick:async (row:any)=>{
         // some action
         this.notifier.warning('It is a warning message');

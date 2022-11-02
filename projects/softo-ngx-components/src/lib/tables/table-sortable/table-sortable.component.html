@@ -47,7 +47,7 @@
 
                         <td data-label="Actions">
                             <ng-container *ngFor="let action of rowActions">
-                            <a href="javascript:void(0)" [class]="getActionClasses(action)" 
+                            <a href="javascript:void(0)" [class]="getActionClasses(action)" [title]="action.tooltip"
                             *ngIf="action?.show==undefined?true:action?.show(row)" [innerHtml]="action.icon"  (click)="action.onClick(row)"></a>
                             </ng-container>
                         </td>
