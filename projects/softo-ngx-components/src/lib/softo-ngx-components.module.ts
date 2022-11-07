@@ -8,7 +8,8 @@ import { NotificationTrayComponent } from './components/notification/notificatio
 import { ButtonComponent } from './components/buttons/button/button.component';
 import {NotifierModule } from 'angular-notifier';
 import { notifierDefaultOptions } from './notifier.config';
-
+import { FilterPipe } from './services/filter/search-filter/search-filter.component'; 
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,11 +17,13 @@ import { notifierDefaultOptions } from './notifier.config';
     TableSortableComponent,
     NotificationTrayComponent,
     ButtonComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,
     ...MatModules,
-    NotifierModule.withConfig(notifierDefaultOptions)
+    NotifierModule.withConfig(notifierDefaultOptions),
+    FormsModule
   ],
   providers:[SoftoAlertService, NotifierService],
   exports: [

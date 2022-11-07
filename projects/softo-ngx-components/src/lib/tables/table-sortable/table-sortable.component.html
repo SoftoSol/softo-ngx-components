@@ -5,14 +5,30 @@
     </div>
     <div class="d-flex justify-content-between align-items-baseline">
       <h4 class="card-title">{{ title }}</h4>
-      <div class="toolbar d-none d-md-block">
-        <button
-          *ngFor="let action of tableActions"
-          [class]="'btn ' + (action.classes ?? '')"
-          (click)="action.onClick()"
-        >
-          <span class="button-text">{{ action.label }}</span>
-        </button>
+
+      <div class="d-flex align-items-center">
+        <div *ngIf="showFilter">
+          <div class="form-outline mx-1">
+            <input
+              type="search"
+              id="form1"
+              class="form-control"
+              placeholder="Search"
+              name="search"
+              [(ngModel)]="searchText"
+            />
+          </div>
+        </div>
+
+        <div class="toolbar d-none d-md-block">
+          <button
+            *ngFor="let action of tableActions"
+            [class]="'btn mx-1' + (action.classes ?? '')"
+            (click)="action.onClick()"
+          >
+            <span class="button-text">{{ action.label }}</span>
+          </button>
+        </div>
       </div>
     </div>
     <div class="toolbar d-block d-md-none" style="text-align: right">
@@ -54,17 +70,21 @@
         <tbody>
           <tr *ngIf="loading; else data">
             <td colspan="100%" class="text-center">
-              <span>Loading...</span>
+              <span>{{
+                dataLoadingMessage ? dataLoadingMessage : "Loading..."
+              }}</span>
             </td>
           </tr>
 
           <ng-template #data>
             <tr *ngIf="rows.length === 0">
               <td colspan="100%" class="text-center">
-                <span>No Data Found...</span>
+                <span>{{
+                  noDataMessage ? noDataMessage : "No Data Found..."
+                }}</span>
               </td>
             </tr>
-            <tr *ngFor="let row of rows">
+            <tr *ngFor="let row of rows | filter: searchText">
               <td
                 *ngFor="let col of header; index as i"
                 [attr.data-label]="col.title"
