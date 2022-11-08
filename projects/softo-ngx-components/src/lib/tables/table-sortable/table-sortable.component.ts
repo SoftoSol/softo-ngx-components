@@ -1,48 +1,57 @@
 // IMPORTANT: this is a plugin which requires jQuery for initialisation and data manipulation
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from "@angular/core";
 
-import { SafeHtml } from '@angular/platform-browser';
-import { ColumnConfig, RowAction, RowActionType, TableButton } from '../interfaces';
-import { PageEvent } from '@angular/material/paginator';
-import { ColumnType } from '../enums';
+import { SafeHtml } from "@angular/platform-browser";
+import {
+  ColumnConfig,
+  RowAction,
+  RowActionType,
+  TableButton,
+} from "../interfaces";
+import { PageEvent } from "@angular/material/paginator";
+import { ColumnType } from "../enums";
 
 interface PaginationConfig {
-  size: number
-  index: number
-  sizes: number[]
-  length: number
+  size: number;
+  index: number;
+  sizes: number[];
+  length: number;
 }
 
 @Component({
-  selector: 'softo-table-sortable',
-  templateUrl: 'table-sortable.component.html',
-  styleUrls:['table-sortable.component.css']
+  selector: "softo-table-sortable",
+  templateUrl: "table-sortable.component.html",
+  styleUrls: ["table-sortable.component.css"],
 })
-
 export class TableSortableComponent implements OnInit {
   //#region INPUTS
   @Input() public title: string = "";
-  @Input() public set headerRow(row: ColumnConfig[]){
+  @Input() public noDataMessage: string = "";
+  @Input() public searchText: string = "";
+  @Input() public showFilter: boolean = false;
+  @Input() public dataLoadingMessage: string = "";
+  @Input() public set headerRow(row: ColumnConfig[]) {
     // if there is no data, return
-    if(!row) return;
+    if (!row) return;
     // clear previous header configuration
-    this.header=[];
+    this.header = [];
     // set default configuration and add to header
-    row?.forEach(col => {
+    row?.forEach((col) => {
       // if sortable is undefined but sort function is defined, set sortable to true
-      if (col.sortable == undefined && col.sort != undefined) col.sortable = true;
+      if (col.sortable == undefined && col.sort != undefined)
+        col.sortable = true;
       // column type is undefined, set to Text
-      if(!col.type) col.type = this.ColumnType.Text;
+      if (!col.type) col.type = this.ColumnType.Text;
       // if column type is undefined, set to Text
-      if(!col.textAlign) col.textAlign = 'left';
+      if (!col.textAlign) col.textAlign = "left";
       // if value is not defined, set to default
-      if(!col.value) col.value = (item:any)=>item[col.title];
+      if (!col.value) col.value = (item: any) => item[col.title];
       // add column to header
       this.header.push(col);
     });
   }
-  @Input() public footer:string[]=[];
+  @Input() public footer: string[] = [];
   @Input() public rowActions: RowAction[] = [];
   @Input() public icon: string | null = null;
   @Input() public tableActions: TableButton[] = [];
@@ -56,7 +65,7 @@ export class TableSortableComponent implements OnInit {
 
   //#region PROPERTIES
   private _dataRows: string[][] = [];
-  public header:ColumnConfig[] = [];
+  public header: ColumnConfig[] = [];
   public rows: string[][] = [];
   public config: PaginationConfig;
   ColumnType = ColumnType;
@@ -71,29 +80,29 @@ export class TableSortableComponent implements OnInit {
       length: 0,
       index: 0,
       size: 10,
-      sizes: [10, 25, 100]
-    }
+      sizes: [10, 25, 100],
+    };
   }
   //#region UI Functions
   // this method determines classes for each column head
   colHeadClass(column: ColumnConfig): string {
-    if (column.type == this.ColumnType.Html) return '';
-    return '';
+    if (column.type == this.ColumnType.Html) return "";
+    return "";
   }
 
   sortData(column: ColumnConfig) {
     if (!column.sortable) return;
     // remove sort from other columns
-    this.header.forEach(col => {
+    this.header.forEach((col) => {
       if (col != column) col.sortDir = undefined;
     });
     // sort data
-    if (column.sortDir == 'asc') {
+    if (column.sortDir == "asc") {
       this._sortAsc(column);
-      column.sortDir = 'desc';
+      column.sortDir = "desc";
     } else {
       this._sortDesc(column);
-      column.sortDir = 'asc';
+      column.sortDir = "asc";
     }
     this._getData();
   }
@@ -132,14 +141,16 @@ export class TableSortableComponent implements OnInit {
     this.config.index = value.pageIndex;
     this._getData();
   }
-  getAsSafeHtml(str: string): SafeHtml { return (str as SafeHtml) };
+  getAsSafeHtml(str: string): SafeHtml {
+    return str as SafeHtml;
+  }
   // get icon of table action
   getActionIcon = (action: RowAction) => action.icon;
   getActionClasses(action: RowAction): string {
-    let classes = 'btn btn-link btn-just-icon ';
-    if (action.type == RowActionType.Warning) classes += 'btn-warning';
-    if (action.type == RowActionType.Danger) classes += 'btn-danger';
-    if (action.type == RowActionType.Info) classes += 'btn-info';
+    let classes = "btn btn-link btn-just-icon ";
+    if (action.type == RowActionType.Warning) classes += "btn-warning";
+    if (action.type == RowActionType.Danger) classes += "btn-danger";
+    if (action.type == RowActionType.Info) classes += "btn-info";
     return classes;
   }
   //#endregion

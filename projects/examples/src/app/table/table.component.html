@@ -3,6 +3,9 @@
     <softo-table-sortable 
         title="List Name" 
         icon="event" 
+        [showFilter]="true"
+        noDataMessage="nothing"
+        dataLoadingMessage="Data is loading"
         [headerRow]="tableColumns" 
         [dataRows]="tableData"
         [rowActions]="rowActions" 
