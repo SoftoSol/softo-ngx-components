@@ -70,18 +70,14 @@
         <tbody>
           <tr *ngIf="loading; else data">
             <td colspan="100%" class="text-center">
-              <span>{{
-                dataLoadingMessage ? dataLoadingMessage : "Loading..."
-              }}</span>
+              <span>{{ loadingMessage }}</span>
             </td>
           </tr>
 
           <ng-template #data>
             <tr *ngIf="rows.length === 0">
               <td colspan="100%" class="text-center">
-                <span>{{
-                  noDataMessage ? noDataMessage : "No Data Found..."
-                }}</span>
+                <span>{{ noDataMessage }}</span>
               </td>
             </tr>
             <tr *ngFor="let row of rows | filter: searchText">

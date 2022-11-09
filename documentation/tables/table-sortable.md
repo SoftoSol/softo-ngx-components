@@ -12,6 +12,8 @@
 |tableActions|No|[TableButton](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/tables/table-button.md)[]|Table level actions. It appears on top left corner|
 |loading|No|bool|Shows loading indicator on table row and hides footer and pagination|
 |dataRows|Yes|string[][]/any[]|Data to display as table|
+| noDataMessage | No       | string  | -           | No Data       |
+| loadingMessage| No       | string  | -           | Loading...    |
 
 
 ## Getting Started
@@ -25,7 +27,7 @@
   <softo-table-sortable 
     title="List Name" 
     [headerRow]="tableColumns" 
-    [dataRows]="tableData"
+    [dataR ows]="tableData"
     [rowActions]="rowActions"
     [tableActions]="tableButtons"
   >

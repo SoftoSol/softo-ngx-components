@@ -75,6 +75,7 @@ export class TableComponent implements OnInit {
       type: ColumnType.Text,
       textAlign: 'left',
       sortable: true,
+      isSearchable:false,
       value: (item:any) => {
         return (item.email ?? "").toLowerCase();
       },

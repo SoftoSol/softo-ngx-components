@@ -27,10 +27,11 @@ interface PaginationConfig {
 export class TableSortableComponent implements OnInit {
   //#region INPUTS
   @Input() public title: string = "";
-  @Input() public noDataMessage: string = "";
+  @Input() public noDataMessage: string = "No Data Found...";
   @Input() public searchText: string = "";
   @Input() public showFilter: boolean = false;
-  @Input() public dataLoadingMessage: string = "";
+  @Input() public isSearchable: boolean = true;
+  @Input() public loadingMessage: string = "Loading...";
   @Input() public set headerRow(row: ColumnConfig[]) {
     // if there is no data, return
     if (!row) return;
