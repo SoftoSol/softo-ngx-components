@@ -12,10 +12,10 @@
 |tableActions|No|[TableButton](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/tables/table-button.md)[]|Table level actions. It appears on top left corner|
 |loading|No|bool|Shows loading indicator on table row and hides footer and pagination|
 |dataRows|Yes|string[][]/any[]|Data to display as table|
-
+| noDataMessage | No       | string  | used to show No Data Message to user | No Data       |
+| dataLoadingMessage | No  | string  | used to show Message to user when data is loading | Loading...    |
 
 ## Getting Started
-
 
 ## Example
 
@@ -49,26 +49,18 @@
   public tableColumns: ColumnConfig[] = [
     {
       title: 'Email',
-      type: ColumnType.Text,
-      textAlign: 'left',
-      sortable: true,
       value: (item) => {
         return (item.email ?? "").toLowerCase();
       },
     },
     {
       title: 'Role',
-      type: ColumnType.Text,
-      textAlign: 'left',
-      sortable: true,
       value: (item) => {
         return item.role;
       }
     }, {
       title: 'Created On',
-      type: ColumnType.Text,
-      textAlign: 'left',
-      sortable: false,
+      sort: (item)=> new Date(item.createdAt),
       value: (item) => {
         return (new Date(item.createdAt)).toDateString();
       }
