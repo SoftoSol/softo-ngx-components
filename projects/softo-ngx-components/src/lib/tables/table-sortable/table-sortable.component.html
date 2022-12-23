@@ -88,6 +88,8 @@
               <td
                 *ngFor="let col of header; index as i"
                 [attr.data-label]="col.title"
+                [style.text-align]="col.textAlign"
+                [class]="col.cssClass"
               >
                 <div
                   *ngIf="col.type == ColumnType.Html"
@@ -98,7 +100,7 @@
                 </div>
               </td>
 
-              <td data-label="Actions">
+              <td data-label="Actions" *ngIf="rowActions?.length??0>0">
                 <ng-container *ngFor="let action of rowActions">
                   <a
                     href="javascript:void(0)"

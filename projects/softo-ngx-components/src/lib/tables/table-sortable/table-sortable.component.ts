@@ -41,12 +41,19 @@ export class TableSortableComponent implements OnInit {
       // if sortable is undefined but sort function is defined, set sortable to true
       if (col.sortable == undefined && col.sort != undefined)
         col.sortable = true;
-      // column type is undefined, set to Text
+      
+        // column type is undefined, set to Text
       if (!col.type) col.type = this.ColumnType.Text;
+      
       // if column type is undefined, set to Text
       if (!col.textAlign) col.textAlign = "left";
+
+      //// if cssClass is undefined, set to empty string
+      if(!col.cssClass) col.cssClass = "";
+      
       // if value is not defined, set to default
       if (!col.value) col.value = (item: any) => item[col.title];
+      
       // add column to header
       this.header.push(col);
     });

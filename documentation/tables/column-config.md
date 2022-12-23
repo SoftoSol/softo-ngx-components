@@ -13,6 +13,7 @@
 |sortDir|No       |'asc' &#124; 'desc'|sort direction, if `sortable`|`asc`|
 |sort?  |No       |(item:any)=>string &#124; number &#124; boolean &#124; Date|sort method|if sort id null, result of will be considered|
 |value| Yes       |(item: any)=>string|value of item to show in rows|-|
+| cssClass | No | string | to apply css class to table column. Applicable for ColumnType.Text only | '' |
 
 ## Example
 
@@ -21,6 +22,7 @@ var colConfig={
     title: 'Email',
     type: ColumnType.Text,
     textAlign: 'left',
+    cssClass:'text-bg-success',
     sortable: true,
     sort:(item:any)=>  item.email??"";
     value: (item:any) => (item.email ?? "").toLowerCase();

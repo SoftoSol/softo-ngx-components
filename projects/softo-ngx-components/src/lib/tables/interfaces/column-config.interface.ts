@@ -6,6 +6,7 @@ export interface ColumnConfig{
     textAlign?:'left'|'right';
     sortable?:boolean;
     sortDir?:'asc'|'desc';
+    cssClass?:string;
     sort?:(item:any)=>string|number|boolean|Date;
     value:(item: any)=>string;
   }

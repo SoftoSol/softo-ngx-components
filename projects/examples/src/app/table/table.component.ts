@@ -73,7 +73,7 @@ export class TableComponent implements OnInit {
     {
       title: 'Email',
       type: ColumnType.Text,
-      textAlign: 'left',
+      textAlign: 'right',
       sortable: true,
       value: (item:any) => {
         return (item.email ?? "").toLowerCase();
@@ -89,9 +89,7 @@ export class TableComponent implements OnInit {
       }
     }, {
       title: 'Created On',
-      type: ColumnType.Text,
-      textAlign: 'left',
-      sortable: false,
+      cssClass: 'text-bg-danger',
       value: (item:any) => {
         return (new Date(item.createdAt)).toDateString();
       }
