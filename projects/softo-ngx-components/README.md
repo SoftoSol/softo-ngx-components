@@ -1,6 +1,8 @@
 # softo-ngx-components
 
 softo-ngx-components is a component library.
+This is generic purpose library specially developed for internal use of [SoftoSol](https://www.softosol.com).
+To use this library, it is recommended to use bootstrap as bootstrap classes are used inside and is dependant on `@angular/material`
 
 ## Getting Started
 
