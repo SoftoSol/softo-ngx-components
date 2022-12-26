@@ -69,12 +69,14 @@ export class TableComponent implements OnInit {
       title: "Id",
       value: (item: any) => item.id,
       sortable: true,
+      width: 10,
     },
     {
       title: 'Email',
       type: ColumnType.Text,
       textAlign: 'right',
       sortable: true,
+      width: 30,
       value: (item:any) => {
         return (item.email ?? "").toLowerCase();
       },
@@ -84,12 +86,14 @@ export class TableComponent implements OnInit {
       type: ColumnType.Text,
       textAlign: 'left',
       sortable: true,
+      width: 30,
       value: (item:any) => {
         return item.role;
       }
     }, {
       title: 'Created On',
       cssClass: 'text-bg-danger',
+      width:20,
       value: (item:any) => {
         return (new Date(item.createdAt)).toDateString();
       }

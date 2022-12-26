@@ -31,6 +31,11 @@ export class TableSortableComponent implements OnInit {
   @Input() public searchText: string = "";
   @Input() public showFilter: boolean = false;
   @Input() public dataLoadingMessage: string = "";
+
+  /// used to show three dots dropdown at the end of the row
+  /// this menu is used to show actions for each row
+  /// this menu is useful when actions are more than 2
+  @Input() public showActionsDropdown:boolean=true;
   @Input() public set headerRow(row: ColumnConfig[]) {
     // if there is no data, return
     if (!row) return;
@@ -53,6 +58,9 @@ export class TableSortableComponent implements OnInit {
       
       // if value is not defined, set to default
       if (!col.value) col.value = (item: any) => item[col.title];
+
+      // if colSpan is undefined, set to 1
+      //if (!col.colSpan) col.colSpan = (item:any)=>1;
       
       // add column to header
       this.header.push(col);
@@ -159,6 +167,11 @@ export class TableSortableComponent implements OnInit {
     if (action.type == RowActionType.Danger) classes += "btn-danger";
     if (action.type == RowActionType.Info) classes += "btn-info";
     return classes;
+  }
+
+  getColWidth(column: ColumnConfig): string {
+    if (column.width) return column.width.toString()+"%";
+    return "auto";
   }
   //#endregion
 }

@@ -14,6 +14,7 @@
 |sort?  |No       |(item:any)=>string &#124; number &#124; boolean &#124; Date|sort method|if sort id null, result of will be considered|
 |value| Yes       |(item: any)=>string|value of item to show in rows|-|
 | cssClass | No | string | to apply css class to table column. Applicable for ColumnType.Text only | '' |
+| Width | No | number | defines width % of column. if width is not defined, columns will have equal width | - |
 
 ## Example
 

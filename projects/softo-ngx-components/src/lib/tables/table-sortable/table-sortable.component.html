@@ -43,6 +43,7 @@
   </div>
   <div class="card-body">
     <div class="material-datatables">
+      <!-- TABLE -->
       <table
         id="datatables"
         class="table table-striped table-no-bordered table-hover"
@@ -51,6 +52,7 @@
         style="width: 100%"
       >
         <thead>
+          <!-- TABLE HEADER ROW -->
           <tr>
             <th
               *ngFor="let row of header"
@@ -63,11 +65,15 @@
               ></span>
             </th>
             <th *ngIf="rowActions.length > 0" class="disabled-sorting">
-              Actions
+              <!-- if actions are shown in dropdown menu, column header should not appear -->
+              <span *ngIf="!showActionsDropdown">Actions</span>
             </th>
           </tr>
+          <!-- END OF TABLE HEADER ROW -->
         </thead>
         <tbody>
+
+          <!-- LOADING -->
           <tr *ngIf="loading; else data">
             <td colspan="100%" class="text-center">
               <span>{{
@@ -75,8 +81,10 @@
               }}</span>
             </td>
           </tr>
+          <!-- END OF LOADING -->
 
           <ng-template #data>
+            <!-- NO DATA -->
             <tr *ngIf="rows.length === 0">
               <td colspan="100%" class="text-center">
                 <span>{{
@@ -84,12 +92,16 @@
                 }}</span>
               </td>
             </tr>
+            <!-- END OF NO DATA -->
+
+            <!-- DATA -->
             <tr *ngFor="let row of rows | filter: searchText">
               <td
                 *ngFor="let col of header; index as i"
                 [attr.data-label]="col.title"
                 [style.text-align]="col.textAlign"
                 [class]="col.cssClass"
+                [style.width]="getColWidth(col)"
               >
                 <div
                   *ngIf="col.type == ColumnType.Html"
@@ -99,8 +111,42 @@
                   {{ col.value(row) }}
                 </div>
               </td>
+              <!-- END OF DATA -->
+
+              <!-- show row actions in last column -->
 
               <td data-label="Actions" *ngIf="rowActions?.length??0>0">
+<!-- <ng-template [ngIf]="showActionsDropdown">
+  <div class="dropdown">
+    <a
+      class="btn btn-link dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <i class="material-icons">more_vert</i>
+  </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+      <ng-template 
+      *ngFor="let action of rowActions">
+      <a
+        class="dropdown-item"
+        href="javascript:void(0)"
+        [class]="getActionClasses(action)"
+        [title]="action.tooltip"
+        *ngIf="action?.show == undefined ? true : action?.show(row)"
+        (click)="action.onClick(row)"
+      >
+
+        {{ action.tooltip }}
+      </a>
+    </ng-template>
+    </div>
+  </div>
+</ng-template> -->
+                <!-- show row actions icons in last column -->
                 <ng-container *ngFor="let action of rowActions">
                   <a
                     href="javascript:void(0)"
