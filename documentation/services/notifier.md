@@ -4,7 +4,7 @@ To show notification on screen, `NotifierService` is helping you.
 
 ## Getting Started
 
-`NotifierService` has dependency on `angular-notifier@11.0.0`
+`NotifierService` has dependency on `angular-notifier-3@17.0.0`
 
 `npm i angular-noitifier@11.0.0`
 
@@ -12,7 +12,7 @@ After installing above dependency, you have to add `<softo-notification-tray></s
 
 To include styles from `angular-notifier` you have added following line to your styles.(css|scss)
 
-    @import '../node_modules/angular-notifier/styles.css';
+    @import '../node_modules/angular-notifier-3/styles.css';
 
 You can add css|scss depends on your application.
 

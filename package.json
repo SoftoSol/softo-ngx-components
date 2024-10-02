@@ -1,6 +1,6 @@
 {
   "name": "ngx-components",
-  "version": "13.2.7",
+  "version": "17.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,17 +11,17 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.0.x",
-    "@angular/cdk": "^17.0.x",
+    "@angular/cdk": "^17.3.10",
     "@angular/common": "^17.0.x",
     "@angular/compiler": "^17.0.x",
     "@angular/core": "^17.0.x",
     "@angular/forms": "^17.0.x",
-    "@angular/material": "^16.2.12",
+    "@angular/material": "^17.3.10",
     "@angular/platform-browser": "^17.0.x",
     "@angular/platform-browser-dynamic": "^17.0.x",
     "@angular/router": "^17.0.x",
-    "angular-notifier": "^17.0.0",
-    "bootstrap": "^5.2.2",
+    "angular-notifier-3": "^17.0.0",
+    "bootstrap": "^5.3.3",
     "rxjs": "~7.4.0",
     "sweetalert2": "^11.14.1",
     "zone.js": "~0.14.10"
@@ -38,7 +38,7 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "ng-packagr": "^18.2.1",
+    "ng-packagr": "^17.0.0",
     "typescript": "^5.2.2"
   }
 }
