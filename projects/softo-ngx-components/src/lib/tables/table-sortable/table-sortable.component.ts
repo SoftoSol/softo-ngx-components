@@ -35,7 +35,7 @@ export class TableSortableComponent implements OnInit {
   /// used to show three dots dropdown at the end of the row
   /// this menu is used to show actions for each row
   /// this menu is useful when actions are more than 2
-  @Input() public showActionsDropdown:boolean=true;
+  @Input() public showActionsDropdown: boolean = true;
   @Input() public set headerRow(row: ColumnConfig[]) {
     // if there is no data, return
     if (!row) return;
@@ -46,22 +46,22 @@ export class TableSortableComponent implements OnInit {
       // if sortable is undefined but sort function is defined, set sortable to true
       if (col.sortable == undefined && col.sort != undefined)
         col.sortable = true;
-      
-        // column type is undefined, set to Text
+
+      // column type is undefined, set to Text
       if (!col.type) col.type = this.ColumnType.Text;
-      
+
       // if column type is undefined, set to Text
       if (!col.textAlign) col.textAlign = "left";
 
       //// if cssClass is undefined, set to empty string
-      if(!col.cssClass) col.cssClass = "";
-      
+      if (!col.cssClass) col.cssClass = "";
+
       // if value is not defined, set to default
       if (!col.value) col.value = (item: any) => item[col.title];
 
       // if colSpan is undefined, set to 1
       //if (!col.colSpan) col.colSpan = (item:any)=>1;
-      
+
       // add column to header
       this.header.push(col);
     });
@@ -122,23 +122,45 @@ export class TableSortableComponent implements OnInit {
     this._getData();
   }
   private _sortAsc(column: ColumnConfig): void {
+
     this._dataRows.sort((a, b) => {
-      const aVal = column.value(a);
-      const bVal = column.value(b);
+      let aVal: string | Date | boolean | number = column.value(a);
+      let bVal: string | Date | boolean | number = column.value(b);
+      // debugger
+      // check if the custom sort is configured
+      if (column.sort) {
+        aVal = column.sort(aVal);
+        bVal = column.sort(bVal);
+      };
+      // aVal and bVal are dates
+      if (typeof aVal == typeof (new Date()) && typeof bVal == typeof (new Date())) {
+        if (column.sort) return (aVal as Date).getTime() - (bVal as Date).getTime();
+        return new Date(aVal as string).getTime() - new Date(bVal as string).getTime();
+      }
       if (aVal > bVal) return 1;
       if (aVal < bVal) return -1;
       return 0;
+
     });
     this._getData();
   }
 
   private _sortDesc(column: ColumnConfig): void {
     this._dataRows.sort((a, b) => {
-      const aVal = column.value(a);
-      const bVal = column.value(b);
+      let aVal: string | Date | boolean | number = column.value(a);
+      let bVal: string | Date | boolean | number = column.value(b);
+      if (column.sort) {
+        aVal = column.sort(aVal);
+        bVal = column.sort(bVal);
+      };
+      if (typeof aVal == typeof (new Date()) && typeof bVal == typeof (new Date())) {
+        if (column.sort) return (bVal as Date).getTime() - (aVal as Date).getTime();
+        return new Date(bVal as string).getTime() - new Date(aVal as string).getTime();
+      }
       if (aVal > bVal) return -1;
       if (aVal < bVal) return 1;
       return 0;
+
     });
     this._getData();
   }
@@ -170,8 +192,10 @@ export class TableSortableComponent implements OnInit {
   }
 
   getColWidth(column: ColumnConfig): string {
-    if (column.width) return column.width.toString()+"%";
+    if (column.width) return column.width.toString() + "%";
     return "auto";
   }
   //#endregion
 }
+
+

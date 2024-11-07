@@ -39,6 +39,7 @@ imports:[
 
 You can find change log for each version
 
+- [x.0.1](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/changelog/x.0.1.md)  
 - [13.2.5](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/changelog/13.2.5.md)
 - [13.2.3](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/changelog/13.2.3.md)
 - [13.2.2](https://github.com/SoftoSol/softo-ngx-components/blob/main/documentation/changelog/13.2.2.md)
