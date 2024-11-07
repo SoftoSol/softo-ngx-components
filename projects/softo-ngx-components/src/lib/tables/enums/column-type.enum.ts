@@ -1,4 +1,5 @@
 export enum ColumnType{
     Text,
-    Html
+    Html,
+    Date
   }

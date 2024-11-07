@@ -125,9 +125,15 @@ export class TableSortableComponent implements OnInit {
     this._dataRows.sort((a, b) => {
       const aVal = column.value(a);
       const bVal = column.value(b);
-      if (aVal > bVal) return 1;
-      if (aVal < bVal) return -1;
-      return 0;
+      if (column.type == ColumnType.Date) {
+        const aDate = new Date(aVal);
+        const bDate = new Date(bVal);
+        return aDate.getTime() - bDate.getTime();
+      } else {
+        if (aVal > bVal) return 1;
+        if (aVal < bVal) return -1;
+        return 0;
+      }
     });
     this._getData();
   }
@@ -136,7 +142,15 @@ export class TableSortableComponent implements OnInit {
     this._dataRows.sort((a, b) => {
       const aVal = column.value(a);
       const bVal = column.value(b);
-      if (aVal > bVal) return -1;
+      if (column.type == ColumnType.Date) {
+        const aDate = new Date(aVal);
+        const bDate = new Date(bVal);
+        return bDate.getTime() - aDate.getTime();
+      } else {
+        if (aVal > bVal) return -1;
+        if (aVal < bVal) return 1;
+        return 0;
+      }      if (aVal > bVal) return -1;
       if (aVal < bVal) return 1;
       return 0;
     });
@@ -175,3 +189,5 @@ export class TableSortableComponent implements OnInit {
   }
   //#endregion
 }
+
+

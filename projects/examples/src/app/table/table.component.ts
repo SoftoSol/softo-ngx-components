@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ColumnConfig, ColumnType, RowAction, RowActionType, TableButton, SoftoAlertService, NotifierService } from 'softo-ngx-components';
+import { ColumnConfig, ColumnType, NotifierService, RowAction, RowActionType, SoftoAlertService, TableButton } from 'projects/softo-ngx-components/src/public-api';
 
 
 @Component({
