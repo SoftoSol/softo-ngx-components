@@ -21,10 +21,10 @@
 
 // @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-@import "node_modules/bootstrap/scss/bootstrap";
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
-@import "node_modules/bootstrap/scss/mixins";
+@import "../../../../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
 @import "core/variables";
 @import "core/mixins";
 @import "core/reboot";
